@@ -1,0 +1,96 @@
+extends layout
+
+block content
+  h1= title
+  p Welcome to #{title}
+  p
+    | zhangsan lisi wangwu
+    | zhaoliu
+  #foo foo
+  .bar bar
+  #title #{title} title
+  p \#{message}
+  label Username:
+    input(name='#{user.name}')
+  p.
+    1234
+    sds
+     sdsfd
+    asd.
+  p .
+  p.
+    foo\bar
+  // 单行注释
+  //
+    块注释
+    就是注释一整块
+  ul
+    li.first
+      a(href='#') foo
+    li
+      a(href='#') bar
+    li.last
+      a(href='#') baz
+  ul
+    li.first: a(href='#') foo
+    li: a(hreg='#') bar
+    li.last: a(href='#') baz
+  div(something=null)
+  div(something=123)
+  a(href='/login', title='View login page') Login
+  input(type='checkbox', checked)
+  input(
+    type='checkbox'
+    name='check'
+    checked)
+  rss(xmlns:atom='atom')
+  a(href='/user/#{user.gender}')= user.name
+  - for (var key in user)
+    p= user[key]
+  p= title
+  p!= title
+  if user.name == 'lisi'
+    ul
+      li #{user.name}
+      li #{user.age}
+      li #{user.gender}
+  else
+    p this is not lisi'page!
+  - var listData = ['one', 'two', 'three']
+  each item, inx in listData
+    li #{item} : #{inx}
+  - var userData1 = [{name: 'aaa', age: 18}, {name: 'bbb', age: 20}, {name: 'ccc', age: 22}]
+  if(userData1)
+    for item2 in userData1
+      if item2.name == 'zhangsan'
+        p #{item2.name} is young!
+      else
+        p= item2.name
+  block listContent
+  p list下的p
+  include block.jade
+  mixin profile(user)
+  // img(src='./images/190131年会-邮件邀请函.png')
+  h2 this is request data
+  div#list
+    each dbUserItem, dbUserInx in userData
+      p #{dbUserItem.user_name}的密码是#{dbUserItem.user_pwd}
+        span(onclick='deleteUser()') 删除
+        span(onclick='updateUser()') 修改
+    p(onclick='addUser()') 添加新用户
+
+
+
+
+  -var html = "<script></script>"
+  | !{html}
+  mixin pets(pets)
+    ul.pets
+      -each pet in pets
+        li= pet
+  mixin profile(user)
+    .user
+      h2= user.name
+      mixin pets(listData)
+
+
